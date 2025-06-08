@@ -80,6 +80,20 @@ public class GridManager : MonoBehaviour
         return Origin + new Vector3(xPosInGrid, 0.0f, zPosInGrid);
     }
 
+    /// Get the grid cell index in the Astar grids with the position given
+    /// </summary>
+    public (int, int) GetGridCoordinates(Vector3 pos)
+    {
+        if (!IsInBounds(pos))
+        {
+            return (-1, -1);
+        }
+
+        int col = (int)Mathf.Floor((pos.x - Origin.x) / gridCellSize);
+        int row = (int)Mathf.Floor((pos.z - Origin.z) / gridCellSize);
+
+        return (col, row);
+    }
     public bool IsInBounds(Vector3 pos)
     {
         float width = numOfColumns * gridCellSize;
@@ -95,11 +109,11 @@ public class GridManager : MonoBehaviour
     public List<Node> GetNeighbours(Node node)
     {
         List<Node> result = new();
-        var (column, row) =
-            GetGridCoordinates(node.position));
+        var (column, row) = GetGridCoordinates(node.position);
+
         if(IsTraversable(numOfColumns - 1, row))
         {
-            result.Add(nodes[column, row - 1]);
+            result.Add(nodes[column - 1, row ]);
         }
 
         if(IsTraversable(column + 1, row))
@@ -153,16 +167,10 @@ public class GridManager : MonoBehaviour
                 for (int j = 0; j < numOfRows; j++)
                 {
 
-                    if (nodes != null && nodes[i,
-
-                        j].isObstacle)
+                    if (nodes != null && nodes[i,j].isObstacle)
                     {
 
-                        Gizmos.DrawCube(
-
-                          GetGridCellCenter(i, j),
-
-                          cellSize);
+                        Gizmos.DrawCube(GetGridCellCenter(i, j), cellSize);
 
                     }
 
