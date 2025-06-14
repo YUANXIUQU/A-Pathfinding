@@ -40,7 +40,7 @@ public class NodePriorityQueue
                 nodes.Remove(oldNode);
             }
         }
-        nodes.Add(node);
-        nodes.Sort((n1, n2) => n1.fScore < n2.fScore ? -1 : 1);
+        nodes.Add(node); //add node
+        nodes.Sort((n1, n2) => n1.fScore < n2.fScore ? -1 : 1); //sort order from smallest
     }
 }
