@@ -61,7 +61,13 @@ public class GridManager : MonoBehaviour
                 Node node = new(cellPos);
                 var collisions = Physics.OverlapSphere(cellPos, gridCellSize / 2 - obstacleEpsilon,
                     1 << LayerMask.NameToLayer("Obstacles"));
+                if(collisions.Length != 0)
+                {
+                    node.MarkAsObstacle();
+                }
+                nodes[i, j] = node;
             }
+            
         }
     }
 
@@ -111,7 +117,7 @@ public class GridManager : MonoBehaviour
         List<Node> result = new();
         var (column, row) = GetGridCoordinates(node.position);
 
-        if(IsTraversable(numOfColumns - 1, row))
+        if(IsTraversable(column - 1, row))
         {
             result.Add(nodes[column - 1, row ]);
         }
