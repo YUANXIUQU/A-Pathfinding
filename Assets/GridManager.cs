@@ -175,7 +175,6 @@ public class GridManager : MonoBehaviour
 
                     if (nodes != null && nodes[i,j].isObstacle)
                     {
-
                         Gizmos.DrawCube(GetGridCellCenter(i, j), cellSize);
 
                     }
