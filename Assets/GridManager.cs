@@ -104,7 +104,7 @@ public class GridManager : MonoBehaviour
     {
         float width = numOfColumns * gridCellSize;
         float height = numOfRows * gridCellSize;
-        return (pos.x >= Origin.x && pos.x <= Origin.x + width && pos.x <= Origin.z + height && pos.z >= Origin.z);
+        return (pos.x >= Origin.x && pos.x <= Origin.x + width && pos.z <= Origin.z + height && pos.z >= Origin.z);
     }
 
     public bool IsTraversable(int col, int row)
